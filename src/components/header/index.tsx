@@ -8,17 +8,18 @@ import StudentHeader from './StudentHeader';
 import ROLES from '../../constants/roles';
 
 type Props = {
-    role?: string
+    role: string
+    location: any
 }
 
 const Header = (props: Props) => {
-    const {role, ...rest} = props;
+    const {role, location, ...rest} = props;
 
     switch (role) {
         case ROLES.PROFESSOR:
-            return <ProfessorHeader {...rest}/>;
+            return <ProfessorHeader location={location} {...rest}/>;
         case ROLES.STUDENT:
-            return <StudentHeader {...rest}/>;
+            return <StudentHeader location={location} {...rest}/>;
         default:
             return <div>Something bad happened...</div>;
     }

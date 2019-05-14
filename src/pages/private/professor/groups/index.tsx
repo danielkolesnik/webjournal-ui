@@ -7,11 +7,15 @@ import {Col, Container, Row} from "react-bootstrap";
 class Groups extends React.Component {
     render() {
         return (
-          <Container fluid className='p-home-page'>
-            <Row className='heading'>
-              <Col><h2>Groups Page</h2></Col>
-            </Row>
-          </Container>
+            <Container fluid className='p-home-page'>
+                <Row className='heading'>
+                    <Col>
+                        <h2 className='page-name'>
+                            <span>Groups.</span>
+                        </h2>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }

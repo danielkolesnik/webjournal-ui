@@ -9,9 +9,8 @@ import {
 } from "react-bootstrap";
 
 // local dependencies
-// import pLogo from '../../assets/p-logo.png';
 import pLogo from '../../assets/p-logo.png';
-import {PROFESSOR_ROUTES} from "../../constants/routes";
+import {PROFESSOR_ROUTES, STUDENT_ROUTES} from "../../constants/routes";
 
 function ProfessorHeader(props: any) {
     return (
@@ -28,13 +27,15 @@ function ProfessorHeader(props: any) {
                     <Nav className='ml-auto'>
                         {
                             Object.keys(PROFESSOR_ROUTES).map(i => {
-                                if(i!=='HOME') return (
+                                // @ts-ignore
+                                const isActive = PROFESSOR_ROUTES[i].REGEXP.test(props.location.pathname);
+                                return (
                                     // @ts-ignore
-                                    <Link key={i} className='nav-link' to={PROFESSOR_ROUTES[i].ROUTE}>{PROFESSOR_ROUTES[i].NAME}</Link>
+                                    <Link key={i} className={`nav-link ${isActive?'active':''}`} data-alt={PROFESSOR_ROUTES[i].NAME} to={PROFESSOR_ROUTES[i].ROUTE}>{PROFESSOR_ROUTES[i].NAME}</Link>
                                 )
                             })
                         }
-                        <span className='nav-link logout-btn'>Logout</span>
+                        <span className='nav-link logout-btn' data-alt='Logout'>Logout</span>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

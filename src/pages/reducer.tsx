@@ -16,7 +16,8 @@ let initialState: State = {
     preloader: false,
     // auth: false,
     auth: true,
-    role: ROLES.PROFESSOR
+    // role: ROLES.PROFESSOR,
+    role: ROLES.STUDENT
 };
 
 // App Reducer

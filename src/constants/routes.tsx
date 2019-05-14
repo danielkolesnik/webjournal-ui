@@ -53,6 +53,14 @@ export const S_HOME = {
     NAME: 'Home'
 };
 
+export const S_SUBJECTS = {
+    LINK: encodeURIComponent(`${STUDENT}/subjects`),
+    ROUTE: `${STUDENT}/subjects`,
+    REGEXP: new RegExp(`${STUDENT}/subjects`, 'i'),
+    HEADING: 'Subjects',
+    NAME: 'Subjects'
+};
+
 export const PROFESSOR_ROUTES = {
     HOME: P_HOME,
     SUBJECTS: P_SUBJECTS,
@@ -61,7 +69,7 @@ export const PROFESSOR_ROUTES = {
 
 export const STUDENT_ROUTES = {
     HOME: S_HOME,
-
+    SUBJECTS: S_SUBJECTS
 };
 
 export const MENU_ROUTES = {

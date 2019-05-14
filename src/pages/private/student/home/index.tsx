@@ -11,10 +11,10 @@ import {
 class Home extends React.Component {
     render() {
         return (
-            <Container fluid className='p-home-page'>
-                <Row>
+            <Container fluid className='s-home-page'>
+                <Row className='heading'>
                     <Col>
-                        CONTENT
+
                     </Col>
                 </Row>
             </Container>

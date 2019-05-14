@@ -5,12 +5,13 @@ import {connect} from 'react-redux';
 // local dependencies
 import Header from '../../../components/header';
 
-class ProfessorLayout extends React.Component {
+class ProfessorLayout extends React.Component<any, any> {
     render() {
-        const {children} = this.props;
+        const {children, location} = this.props;
+        console.log(location);
         return (
             <section id='professor'>
-                <Header/>
+                <Header location={location}/>
                 <div className='content'>
                     {children}
                 </div>

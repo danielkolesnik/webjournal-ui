@@ -7,9 +7,13 @@ import {Col, Container, Row} from "react-bootstrap";
 class Subjects extends React.Component {
     render() {
         return (
-            <Container fluid className='p-home-page'>
+            <Container fluid className='p-subjects-page'>
                 <Row className='heading'>
-                    <Col><h2>Subjects Page</h2></Col>
+                    <Col>
+                        <h2 className='page-name'>
+                            <span>Subjects.</span>
+                        </h2>
+                    </Col>
                 </Row>
             </Container>
         )

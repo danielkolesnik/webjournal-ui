@@ -9,12 +9,14 @@ import {PUBLIC, PROFESSOR_ROUTES, STUDENT_ROUTES} from "../../constants/routes";
 
 // Professor routes
 import ProfessorLayout from "./professor";
+import HomeP from "./professor/home";
+import SubjectsP from "./professor/subjects";
+import GroupsP from "./professor/groups";
 
 // Student routes
 import StudentLayout from "./student";
-import Home from "./professor/home";
-import Subjects from "./professor/subjects";
-import Groups from "./professor/groups";
+import HomeS from "./student/home";
+import SubjectsS from "./student/subjects";
 
 type Props = {
     preloader?: boolean
@@ -31,19 +33,22 @@ function PrivateLayout(props: Props) {
     switch(role) {
         case ROLES.PROFESSOR:
             return (
-                <ProfessorLayout>
+                <ProfessorLayout location={location}>
                     <Switch>
-                        <Route exact path={PROFESSOR_ROUTES.HOME.ROUTE} component={Home}/>
-                        <Route exact path={PROFESSOR_ROUTES.SUBJECTS.ROUTE} component={Subjects}/>
-                        <Route exact path={PROFESSOR_ROUTES.GROUPS.ROUTE} component={Groups}/>
+                        <Route exact path={PROFESSOR_ROUTES.HOME.ROUTE} component={HomeP}/>
+                        <Route exact path={PROFESSOR_ROUTES.SUBJECTS.ROUTE} component={SubjectsP}/>
+                        <Route exact path={PROFESSOR_ROUTES.GROUPS.ROUTE} component={GroupsP}/>
                     </Switch>
                 </ProfessorLayout>
             );
         case ROLES.STUDENT:
             return (
-                <Switch>
-                    <Route path={STUDENT_ROUTES.HOME.ROUTE} component={StudentLayout}/>
-                </Switch>
+                <StudentLayout location={location}>
+                    <Switch>
+                        <Route path={STUDENT_ROUTES.HOME.ROUTE} component={HomeS}/>
+                        <Route path={STUDENT_ROUTES.SUBJECTS.ROUTE} component={SubjectsS}/>
+                    </Switch>
+                </StudentLayout>
             );
         default:
             return <div>Something happened in the authentication step, please try re-login</div>

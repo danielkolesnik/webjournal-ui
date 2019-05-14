@@ -1,0 +1,12 @@
+.s-subjects-page {
+  padding: 0 30px;
+  -webkit-transition: padding-left 250ms ease-out;
+  -moz-transition: padding-left 250ms ease-out;
+  -o-transition: padding-left 250ms ease-out;
+  transition: padding-left 250ms ease-out;
+  color: #000;
+
+  &.aside-open {
+    padding-left: 215px;
+  }
+}

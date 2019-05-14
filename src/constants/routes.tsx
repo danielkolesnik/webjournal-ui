@@ -33,15 +33,15 @@ export const P_SUBJECTS = {
     LINK: encodeURIComponent(`${PROFESSOR}/subjects`),
     ROUTE: `${PROFESSOR}/subjects`,
     REGEXP: new RegExp(`${PROFESSOR}/subjects`, 'i'),
-    HEADING: 'My Subjects',
-    NAME: 'My Subjects'
+    HEADING: 'Subjects',
+    NAME: 'Subjects'
 };
 export const P_GROUPS = {
     LINK: encodeURIComponent(`${PROFESSOR}/groups`),
     ROUTE: `${PROFESSOR}/groups`,
     REGEXP: new RegExp(`${PROFESSOR}/groups`, 'i'),
-    HEADING: 'My Groups',
-    NAME: 'My Groups'
+    HEADING: 'Groups',
+    NAME: 'Groups'
 };
 
 

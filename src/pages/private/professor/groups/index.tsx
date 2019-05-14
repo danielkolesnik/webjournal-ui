@@ -1,12 +1,17 @@
 // outsource
 import React from 'react';
+import {Col, Container, Row} from "react-bootstrap";
 
 // local dependencies
 
 class Groups extends React.Component {
     render() {
         return (
-            <div>Groups Page</div>
+          <Container fluid className='p-home-page'>
+            <Row className='heading'>
+              <Col><h2>Groups Page</h2></Col>
+            </Row>
+          </Container>
         )
     }
 }

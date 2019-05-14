@@ -34,6 +34,7 @@ function ProfessorHeader(props: any) {
                                 )
                             })
                         }
+                        <span className='nav-link logout-btn'>Logout</span>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

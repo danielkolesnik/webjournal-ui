@@ -9,7 +9,7 @@ class ProfessorLayout extends React.Component {
     render() {
         const {children} = this.props;
         return (
-            <section id='pHomePage'>
+            <section id='professor'>
                 <Header/>
                 <div className='content'>
                     {children}

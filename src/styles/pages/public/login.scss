@@ -1,0 +1,200 @@
+#public {
+  height: inherit;
+}
+
+#loginPage {
+  height: inherit;
+  overflow: hidden;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    z-index: 9;
+    content: ' ';
+    width: 50%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #013A6B;
+  }
+
+  &:after {
+    position: absolute;
+    z-index: 9;
+    content: ' ';
+    width: 50%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #004E95;
+  }
+
+  .choice-wrapper {
+    position: absolute;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    background-image: -webkit-linear-gradient(-45deg, #013A6B 50%, #004E95 50%);
+    background-image: linear-gradient(-45deg, #004E95 50%, #013A6B 50%);
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-transition: background-position 250ms ease-out;
+    -moz-transition: background-position 250ms ease-out;
+    -o-transition: background-position 250ms ease-out;
+    transition: background-position 250ms ease-out;
+
+  }
+    .choices-holder {
+      position: relative;
+      height: 100%;
+      margin: auto;
+
+      &.professor-hovered {
+
+        .student-wrapper {
+          transform: translate(-100%, -100%);
+        }
+
+        .professor-wrapper {
+          transform: translate(150%, 25%);
+        }
+
+        .forms-wrapper {
+
+          .professor-form {
+            display: block;
+          }
+        }
+      }
+
+      &.student-hovered {
+
+        .professor-wrapper {
+          transform: translate(400%, 200%);
+        }
+
+        .student-wrapper {
+          transform: translate(150%, 25%);
+        }
+
+        .forms-wrapper {
+
+          .student-form {
+            display: block;
+          }
+        }
+      }
+
+      &.student-hovered, &.professor-hovered {
+        .discard-btns-holder {
+          transform: translateY(2em);
+        }
+
+        .forms-wrapper {
+          margin-bottom: 200px;
+        }
+      }
+
+      .student-wrapper, .professor-wrapper {
+        position: absolute;
+        width: 25%;
+        height: 50%;
+        border-radius: 50%;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        -webkit-transition: all 250ms ease-out;
+        -moz-transition: all 250ms ease-out;
+        -o-transition: all 250ms ease-out;
+        transition: all 250ms ease-out;
+
+        //border: red 1px solid;
+
+        h2 {
+          color: white;
+          margin-bottom: 30px;
+
+        }
+
+        .person-img {
+          filter: invert(100%);
+          width: 200px;
+          height: auto;
+        }
+      }
+
+      .student-wrapper {
+        background-color: rgba(#013A6B, 0);
+        transform: translate(25%, 25%);
+      }
+
+      .professor-wrapper {
+        background-color: rgba(#004E95, 0);
+        transform: translate(275%, 75%);
+      }
+
+      .discard-btns-holder {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        position: absolute;
+        z-index: 25;
+        font-size: 4em;
+        color: #FFFFFF;
+        top: -2em;
+        padding: 30px;
+
+        -webkit-transition: transform 250ms ease-out;
+        -moz-transition: transform 250ms ease-out;
+        -o-transition: transform 250ms ease-out;
+        transition: transform 250ms ease-out;
+
+        svg {
+          cursor: pointer;
+        }
+      }
+
+      .forms-wrapper {
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 25;
+        color: #FFFFFF;
+        bottom: 0;
+        margin-bottom: -150px;
+
+        -webkit-transition: margin 250ms ease-out;
+        -moz-transition: margin 250ms ease-out;
+        -o-transition: margin 250ms ease-out;
+        transition: margin 250ms ease-out;
+
+        .student-form, .professor-form {
+          width: 400px;
+          height: 200px;
+
+          .submit-btn {
+            margin-top: 28px;
+          }
+        }
+
+        .student-form {
+          display: none;
+          position: absolute;
+          bottom: 0;
+        }
+
+        .professor-form {
+          display: none;
+          position: absolute;
+          bottom: 0;
+        }
+      }
+
+    }
+
+}

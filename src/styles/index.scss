@@ -1,0 +1,23 @@
+// Outsource
+@import '~bootstrap/scss/bootstrap.scss';
+
+// fonts
+@import "fonts";
+
+// mixins
+@import "mixins";
+
+// global variables
+@import "variables";
+
+// typing
+@import "typing";
+
+// base
+@import "base";
+
+// components
+@import "components/index";
+
+// pages
+@import "pages/index";

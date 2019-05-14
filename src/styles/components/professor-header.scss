@@ -1,0 +1,47 @@
+#pHeader {
+  background-color: #004E95;
+  position: fixed;
+  top: 0;
+
+  .logo {
+      height: 74px;
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,<svg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+  }
+
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .nav-link {
+    color: white;
+  }
+
+  .navbar-collapse {
+    -webkit-transition: all 150ms ease-out;
+    -moz-transition: all 150ms ease-out;
+    -o-transition: all 150ms ease-out;
+    transition: all 150ms ease-out;
+
+    @media #{$lsmscreen} {
+      &.show {
+        padding-top: 20px;
+
+        .nav-link {
+          margin-left: 0;
+        }
+      }
+
+      .nav-link {
+        -webkit-transition: all 150ms ease-out;
+        -moz-transition: all 150ms ease-out;
+        -o-transition: all 150ms ease-out;
+        transition: all 150ms ease-out;
+        transition-delay: 180ms;
+        margin-left: -300px;
+      }
+    }
+  }
+}

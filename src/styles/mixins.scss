@@ -1,0 +1,203 @@
+/*-------------------------------------------------
+    MIXINS
+---------------------------------------------------*/
+
+// @include user-select( none );
+@mixin user-select( $select ){
+  -webkit-touch-callout:  $select;
+  -webkit-user-select:    $select;
+  -khtml-user-select:     $select;
+  -moz-user-select:       $select;
+  -ms-user-select:        $select;
+  user-select:            $select;
+}
+
+// .box-sizing ( border-box )
+@mixin box-sizing( $sizing ){
+  -webkit-box-sizing: $sizing;
+  -moz-box-sizing:    $sizing;
+  box-sizing:         $sizing;
+}
+
+// .background-size ( 100% 100% );
+@mixin background-size( $size ){
+  -webkit-background-size:$size;
+  -khtml-background-size: $size;
+  -moz-background-size:   $size;
+  -o-background-size:     $size;
+  background-size:        $size;
+}
+
+// @include text-shadow( 2px 2px 3px rgba(0, 0, 0, 0.35) ); || .text-shadow();
+@mixin text-shadow( $props: 0 1px 3px rgba(0, 0, 0, 0.25) ){
+  text-shadow: $props;
+}
+
+// .box-shadow ( 2px 2px 10px rgba(0,0,0,0.5) ); || @include box-shadow();
+@mixin box-shadow( $props: 0 0 10px rgba(0,0,0,0.5) ){
+  -webkit-box-shadow: $props;
+  -moz-box-shadow:    $props;
+  box-shadow:         $props;
+}
+
+// @include inner-shadow( 0 0 10px rgba(0,0,0,0.5) ); || .inner-shadow();
+@mixin inner-shadow( $props: 0 0 10px rgba(0,0,0,0.5) ){
+  @include box-shadow( inset $props );
+}
+
+// @include border-radius( 7px );
+@mixin border-radius( $radius: 5px ){
+  -webkit-border-radius:  $radius;
+  -moz-border-radius:     $radius;
+  border-radius:          $radius;
+}
+
+// @include opacity( 0.8 ); || .opacity( 0.8 );
+@mixin opacity( $opacity: 0.5 ){
+  -webkit-opacity:    $opacity;
+  -moz-opacity:       $opacity;
+  opacity:            $opacity;
+}
+
+// @include animation( blink, 500ms, infinite, ease-in-out );
+@mixin animation( $name, $duration: 300ms, $delay: 0, $ease: ease ){
+  -webkit-animation: $name $duration $delay $ease;
+  -moz-animation:    $name $duration $delay $ease;
+  -ms-animation:     $name $duration $delay $ease;
+  animation:         $name $duration $delay $ease;
+}
+// @include animation-delay( .6s );
+@mixin animation-delay( $arguments... ){
+  animation-delay: $arguments;
+  -o-animation-delay: $arguments;
+  -ms-animation-delay: $arguments;
+  -moz-animation-delay: $arguments;
+  -webkit-animation-delay: $arguments;
+}
+
+// TODO translate from LESS into SASS
+// .keyframes( blink, { 0% { background: red; } 100%{ background: green; } });
+//.keyframes( @name; @arguments ) {
+//  @keyframes @name { @arguments(); }
+//  @-o-keyframes @name { @arguments(); }
+//  @-ms-keyframes @name { @arguments(); }
+//  @-moz-keyframes @name { @arguments(); }
+//  @-webkit-keyframes @name { @arguments(); }
+//}
+
+// .transition ( padding-top 0.5s ease ); $transition: all 0.5s ease
+@mixin transition( $transition: all 0.5s ease ){
+  -webkit-transition: $transition;
+  -moz-transition:    $transition;
+  -ms-transition:     $transition;
+  -o-transition:      $transition;
+  transition:         $transition;
+}
+
+// @include transform( rotate(45deg) );
+@mixin transform( $arguments... ){
+  -webkit-transform:  $arguments;
+  -moz-transform:     $arguments;
+  -ms-transform:      $arguments;
+  -o-transform:       $arguments;
+  transform:          $arguments;
+}
+
+@mixin transition-transform( $arguments... ){
+  -webkit-transition: -webkit-transform $arguments;
+  -moz-transition: -moz-transform $arguments;
+  -o-transition: -o-transform $arguments;
+  transition: transform $arguments;
+}
+
+// @include transform-origin( top, center ); || .transform-origin();
+@mixin transform-origin( $x:center, $y:center ){
+  -webkit-transform-origin: $x $y;
+  -moz-transform-origin:    $x $y;
+  -ms-transform-origin:     $x $y;
+  -o-transform-origin:      $x $y;
+  transform-origin:         $x $y;
+}
+
+// @include translate( 45px, 15px ); || .translate( 45px );
+@mixin translate( $x, $y: 0 ){
+  @include transform( translate( $x, $y ) );
+}
+
+
+// @include translate3d( 20px, 30px, 40px ); || .translate3d( 20px );
+@mixin translate3d( $x, $y: 0, $z: 0 ){
+  @include transform( translate3d( $x, $y, $z ) );
+}
+
+// @include rotate( 90deg );
+@mixin rotate( $deg ){
+  @include transform( rotate($deg) );
+}
+
+// TODO translate from LESS into SASS
+// .scale( 2, 3 ); || .scale( 2 );
+//.scale ( @factor-x, @factor-y: true ) {
+//  .if() when ( @factor-y ) { @factor-y: @factor-x; }.if;
+//  @scale: scale(@factor-x, @factor-y);
+//  .transform( @scale );
+//}
+
+// TODO translate from LESS into SASS
+// .skew( 45deg, 15deg ); || .skew( 45deg );
+//.skew ( @deg-x, @deg-y: true ) {
+//  .if() when ( @deg-y ) { @deg-y: @deg-x; }.if;
+//  @skew: skew( @deg-x, @deg-y );
+//  .transform( @skew );
+//}
+
+// @include perspective( 100 ); || .perspective();
+@mixin perspective( $value: 1000 ){
+  -webkit-perspective:$value;
+  -moz-perspective:   $value;
+  -ms-perspective:    $value;
+  perspective:        $value;
+}
+
+// TODO translate from LESS into SASS
+// .horizontal-gradient( #000, #FFF, 0%, 100% );
+//.horizontal-gradient ( @start-color: #333; @end-color: #555; @start-percent: 0%; @end-percent: 100% ) {
+//  background-image: -webkit-linear-gradient(left, color-stop(@start-color @start-percent), color-stop(@end-color @end-percent)); // Safari 5.1-6, Chrome 10+
+//  background-image: -o-linear-gradient(left, @start-color @start-percent, @end-color @end-percent); // Opera 12
+//  background-image: linear-gradient(to right, @start-color @start-percent, @end-color @end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+//  background-repeat: repeat-x;
+//  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start-color),argb(@end-color))); // IE9 and down
+//}
+
+// @include vertical-gradient( #000, #FFF, 0%, 100% );
+@mixin vertical-gradient( $start-color: #333, $end-color: #555, $start-percent: 0%, $end-percent: 100% ){
+  background-image: -webkit-linear-gradient(top, color-stop($start-color $start-percent), color-stop($end-color $end-percent)); // Safari 5.1-6, Chrome 10+
+  background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent); // Opera 12
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+  background-repeat: repeat-y;
+}
+
+// TODO translate from LESS into SASS
+//.background-opacity(@color, @opacity) {
+//  @rgba-color: rgba(red(@color), green(@color), blue(@color), @opacity);
+//
+//  background-color: @rgba-color;
+//
+//  // Hack for IE8:
+//  background: none\9; // Only IE8
+//  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d')", argb(@rgba-color),argb(@rgba-color))); // IE9 and down
+//  // Problem: Filter gets applied twice in IE9.
+//  // Solution:
+//  &:not([dummy]) {
+//    filter: progid:DXImageTransform.Microsoft.gradient(enabled='false'); // Only IE9
+//  }
+//}
+
+@mixin row-gutter($gutter-width: 15px){
+  margin-right: -$gutter-width;
+  margin-left: -$gutter-width;
+  > [class*="col-"] {
+    padding-right: $gutter-width;
+    padding-left: $gutter-width;
+  }
+}

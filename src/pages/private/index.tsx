@@ -38,6 +38,7 @@ function PrivateLayout(props: Props) {
                         <Route exact path={PROFESSOR_ROUTES.HOME.ROUTE} component={HomeP}/>
                         <Route exact path={PROFESSOR_ROUTES.SUBJECTS.ROUTE} component={SubjectsP}/>
                         <Route exact path={PROFESSOR_ROUTES.GROUPS.ROUTE} component={GroupsP}/>
+                        <Redirect from='/' to={PROFESSOR_ROUTES.HOME.ROUTE}/>
                     </Switch>
                 </ProfessorLayout>
             );
@@ -47,6 +48,7 @@ function PrivateLayout(props: Props) {
                     <Switch>
                         <Route path={STUDENT_ROUTES.HOME.ROUTE} component={HomeS}/>
                         <Route path={STUDENT_ROUTES.SUBJECTS.ROUTE} component={SubjectsS}/>
+                        <Redirect from='/' to={STUDENT_ROUTES.HOME.ROUTE}/>
                     </Switch>
                 </StudentLayout>
             );

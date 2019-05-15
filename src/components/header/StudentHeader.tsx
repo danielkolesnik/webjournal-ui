@@ -11,6 +11,7 @@ import {
 // local dependencies
 import pLogo from '../../assets/s-logo.png';
 import {STUDENT_ROUTES} from "../../constants/routes";
+import {connect} from "react-redux";
 
 function StudentHeader (props: any) {
     return (
@@ -43,4 +44,8 @@ function StudentHeader (props: any) {
     )
 }
 
-export default StudentHeader;
+export default connect(
+    null,
+    dispatch => ({
+        logout: ()=>dispatch({type: 'LOGOUT'})
+}))(StudentHeader);

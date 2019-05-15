@@ -3,7 +3,7 @@ import ROLES from '../../../../constants/roles';
 
 type Subject = {
     name: string
-    course: number
+    type: string
     teachers: string | string[]
 }
 
@@ -21,23 +21,53 @@ let initialState: State = {
     preloader: false,
     subjects: [
         {
-            name: 'Discrete Math',
-            course: 2,
+            name: 'Study of mathematical operations',
+            type: 'exam',
             teachers: 'Polyakova L.Y.'
         },
         {
             name: 'Mathematical Analysis',
-            course: 2,
+            type: 'credit',
             teachers: 'Gefter S.L.'
         },
         {
             name: 'C++ STL',
-            course: 2,
+            type: 'exam',
             teachers: ['Vladimirova M.V.', 'Morozova A.G.']
         },
         {
             name: 'Operation Systems',
-            course: 2,
+            type: 'exam',
+            teachers: 'Ignatov S.Y.'
+        },
+        {
+            name: 'Mathematical Analysis',
+            type: 'credit',
+            teachers: 'Gefter S.L.'
+        },
+        {
+            name: 'C++ STL',
+            type: 'credit',
+            teachers: ['Vladimirova M.V.', 'Morozova A.G.']
+        },
+        {
+            name: 'Operation Systems',
+            type: 'exam',
+            teachers: 'Ignatov S.Y.'
+        },
+        {
+            name: 'Mathematical Analysis',
+            type: 'exam',
+            teachers: 'Gefter S.L.'
+        },
+        {
+            name: 'C++ STL',
+            type: 'credit',
+            teachers: ['Vladimirova M.V.', 'Morozova A.G.']
+        },
+        {
+            name: 'Operation Systems',
+            type: 'exam',
             teachers: 'Ignatov S.Y.'
         },
     ]

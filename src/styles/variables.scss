@@ -10,7 +10,8 @@ $mobile-point:      576px;
 $mobile-point-x:    320px;
 
 /* Large desktops and laptops */
-$lgscreen: "(min-width: #{$desktop-hd-point})";
+$glgscreen: "(min-width: #{$desktop-hd-point})";
+$llgscreen: "(max-width: #{$desktop-hd-point})";
 
 /* Portrait tablets and medium desktops */
 $mdscreen: "(max-width: 991px)";

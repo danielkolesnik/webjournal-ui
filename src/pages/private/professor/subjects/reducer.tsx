@@ -1,8 +1,9 @@
-// local dependencies
-import ROLES from '../constants/roles';
-import Action from "../types/Action";
-import {APP, SIGN_IN} from "../constants/actions";
 
+// local dependencies
+// import {PROFESSOR} from '../../../../constants/actions';
+import ROLES from '../../../../constants/roles';
+import Action from "../../../../types/Action";
+// const {SUBJECTS} = STUDENT;
 
 type State = {
     preloader: boolean,
@@ -24,18 +25,9 @@ export default function(state: State = initialState, action: Action): State {
 
     switch(type) {
 
-        // case SIGN_IN.LOG_IN.FINISH:
+        // case PROFESSOR.GET_SUBJECTS.FINISH:
         //     state = {...state, auth: true, role: payload.role};
-        //     console.log(payload);
-        //     break;
-
-        case 'authorization':
-            state = {...state, auth: true, role: payload.role};
-            console.log(payload);
-            break;
-
-        // case '@@router/LOCATION_CHANGE':
-        //     console.log(payload.action, payload.location.pathname, payload.location.state);
+        //     console.log(type, payload);
         //     break;
 
         default:

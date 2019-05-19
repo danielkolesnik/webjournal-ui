@@ -8,7 +8,6 @@ import Header from '../../../components/header';
 class ProfessorLayout extends React.Component<any, any> {
     render() {
         const {children, location} = this.props;
-        console.log(location);
         return (
             <section id='professor'>
                 <Header location={location}/>

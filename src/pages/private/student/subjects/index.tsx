@@ -7,9 +7,14 @@ import {
     Card,
 } from "react-bootstrap";
 import {connect} from "react-redux";
+import {IoIosInfinite} from 'react-icons/io';
 
 // local dependencies
 // import Aside from "../../../../components/aside/StudentAside";
+import {STUDENT, MODAL} from "../../../../constants/actions";
+import {STUDENT_MODAL} from "../../../../components/modal/view";
+import Subject from "../../../../types/student/Subject";
+import Preloader, {NumberPreloader} from "../../../../components/Preloader";
 
 /**
  * TODO:
@@ -22,8 +27,17 @@ class Subjects extends React.Component<any, any> {
         asideOpen: false
     };
 
+    componentDidMount() {
+        this.props.initialize();
+    }
 
-
+    openSubject = (subject: Subject) => {
+        this.props.showModal(STUDENT_MODAL.SUBJECT, {
+            subject,
+            open: true,
+            size: 'lg'
+        })
+    };
     // subscription on change aside state
     // toggleAside = () => {
     //     this.setState({...this.state, asideOpen: !this.state.asideOpen});
@@ -31,7 +45,7 @@ class Subjects extends React.Component<any, any> {
 
     render() {
         const {asideOpen} = this.state;
-        const {subjects} = this.props;
+        const {subjects, preloader} = this.props;
 
         // const MENU_ITEMS = [
         //     {
@@ -65,12 +79,13 @@ class Subjects extends React.Component<any, any> {
                     <Row className='heading mb-3'>
                         <Col>
                             <h3 className='page-name'>
-                                <span>{subjects.length} Subjects.</span>
+                                <span><NumberPreloader isOpen={preloader} number={subjects.length}/> Subjects.</span>
                             </h3>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
+                            <Preloader isOpen={preloader}/>
                             <div className='subjects'>
                                 {
                                     subjects.map((subject: any, k: number) => {
@@ -81,12 +96,15 @@ class Subjects extends React.Component<any, any> {
                                             })
                                         } else teachers = subject.teachers;
                                         return (
-                                            <Card className='subject' key={k}>
+                                            <Card className='subject' key={k} onClick={()=>this.openSubject(subject)}>
                                                 <Card.Body>
                                                     <Card.Title>{subject.name}</Card.Title>
                                                     <Card.Subtitle>{subject.type}</Card.Subtitle>
                                                     <Card.Text>
-                                                        Teachers: {teachers}
+                                                        Teachers:
+                                                    </Card.Text>
+                                                    <Card.Text>
+                                                        {teachers}
                                                     </Card.Text>
                                                 </Card.Body>
                                             </Card>
@@ -106,5 +124,10 @@ export default connect(
     (state:any)=>({
         ...state.subjectsS
     }),
-    null
+    dispatch => ({
+        // hideModal: () => dispatch({type: MODAL.HIDE}),
+        showModal: (modalType: string, modalProps: any) => dispatch({type: MODAL.SHOW, payload: {modalProps, modalType}}),
+        initialize: () => dispatch({type: STUDENT.SUBJECTS.INITIALIZE})
+
+    })
 )(Subjects);

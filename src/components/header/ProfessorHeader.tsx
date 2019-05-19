@@ -4,43 +4,67 @@ import { Link } from 'react-router-dom';
 import {
     Container,
     Navbar,
-    NavDropdown,
     Nav
 } from "react-bootstrap";
 
 // local dependencies
 import pLogo from '../../assets/p-logo.png';
-import {PROFESSOR_ROUTES, STUDENT_ROUTES} from "../../constants/routes";
+import {PROFESSOR_ROUTES} from "../../constants/routes";
+import OutsideClickHandler from '../../components/OutsideClickHandler';
 
-function ProfessorHeader(props: any) {
-    return (
-        <Container fluid id='pHeader'>
 
-            <Navbar collapseOnSelect expand='md'>
-                <Navbar.Brand>
-                    <Link to={PROFESSOR_ROUTES.HOME.ROUTE}>
-                        <img className='logo' src={pLogo} alt=""/>
-                    </Link>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className='ml-auto'>
-                        {
-                            Object.keys(PROFESSOR_ROUTES).map(i => {
-                                // @ts-ignore
-                                const isActive = PROFESSOR_ROUTES[i].REGEXP.test(props.location.pathname);
-                                return (
+class ProfessorHeader extends React.Component<any, any> {
+
+    state = {
+        navExpanded: false
+    };
+
+    setNavExpanded = (expanded: boolean) => this.setState({ navExpanded: expanded });
+
+    closeNav = () => this.setState({ navExpanded: false });
+
+    render() {
+        const {navExpanded} = this.state;
+        const {location} = this.props;
+        // @ts-ignore
+        return (<OutsideClickHandler onClickOutside={this.closeNav}>
+            <Container fluid id='pHeader'>
+                <Navbar collapseOnSelect
+                        expand='md'
+                        onToggle={this.setNavExpanded}
+                        expanded={navExpanded}
+                >
+                    <Navbar.Brand>
+                        <Link to={PROFESSOR_ROUTES.HOME.ROUTE}>
+                            <img className='logo' src={pLogo} alt="logotype"/>
+                        </Link>
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className='ml-auto' onSelect={this.closeNav}>
+                            {
+                                Object.keys(PROFESSOR_ROUTES).map(i => {
                                     // @ts-ignore
-                                    <Link key={i} className={`nav-link ${isActive?'active':''}`} data-alt={PROFESSOR_ROUTES[i].NAME} to={PROFESSOR_ROUTES[i].ROUTE}>{PROFESSOR_ROUTES[i].NAME}</Link>
-                                )
-                            })
-                        }
-                        <span className='nav-link logout-btn' data-alt='Logout'>Logout</span>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-        </Container>
-    )
+                                    const isActive = PROFESSOR_ROUTES[i].REGEXP.test(location.pathname);
+                                    return (
+                                        // @ts-ignore
+                                        <Nav.Link as={Link} onClick={this.closeNav} key={i} className={`nav-link ${isActive ? 'active' : ''}`} data-alt={PROFESSOR_ROUTES[i].NAME} to={PROFESSOR_ROUTES[i].ROUTE}>
+                                            {
+                                                // @ts-ignore
+                                                PROFESSOR_ROUTES[i].NAME
+                                            }
+                                        </Nav.Link>
+                                    )
+                                })
+                            }
+                            <span className='nav-link logout-btn' data-alt='Logout'>Logout</span>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </Container>
+        </OutsideClickHandler>
+        )
+    }
 }
 
 export default ProfessorHeader;

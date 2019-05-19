@@ -1,3 +1,59 @@
-p {
+.s-home-page {
+  color: white;
+  .last-events {
+    .event {
+      background-color: #004E95;
+      margin-bottom: 15px;
+      max-width: 680px;
+      margin: auto;
 
+      .card-title {
+        color: white;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
+      .card-subtitle {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.9em;
+        left: 5px;
+        right: 0;
+        bottom: 2px;
+        font-weight: 800;
+        font-style: italic;
+        text-transform: lowercase;
+      }
+    }
+  }
+
+  .upcoming-events {
+    .carousel-wrapper {
+      position: relative;
+      padding: 0 40px;
+
+      .event {
+        //height: 200px;
+        //background-color: red;
+      }
+
+      .carousel-ctrl-btn {
+        color: rgba(0, 0, 0, 0.25);
+        font-size: 30px;
+        position: absolute;
+        cursor: pointer;
+
+        &.left {
+          left: 0;
+          top: calc(50% - 15px)
+        }
+
+        &.right {
+          right: 0;
+          top: calc(50% - 15px)
+        }
+      }
+    }
+  }
 }

@@ -3,57 +3,43 @@
 import ROLES from './roles';
 
 export const SUFFIX: any = {
-    ASK: 'ASK',
     REQUEST: 'REQUEST',
     SUCCESS: 'SUCCESS',
     ERROR: 'ERROR',
     FINISH: 'FINISH',
 };
 
-export function createComplexType (type: string) {
+function createComplexType (type: string, suffix: any = SUFFIX) {
     let action: any = {};
-    for ( let name of Object.keys(SUFFIX) ) {
-        action[name] = `${type}.${SUFFIX[name]}`;
+    for ( let name of Object.keys(suffix) ) {
+        action[name] = `${type}.${suffix[name]}`;
     }
     return action;
 }
 
-let loginPrefix = `@@signin-page/`;
-export const SIGN_IN = {
-    // simple
-    PRELOADER: loginPrefix+'PRELOADER',
-    HANDLE_ERROR: loginPrefix+'HANDLE_ERROR',
-    CLEAR: loginPrefix+'CLEAR',
-    // complex
-    LOG_IN: createComplexType(loginPrefix+'LOG_IN')
-};
+export const SIGN_IN = (() => {
+    let prefix = `@@signin-page/`;
+
+    return {
+        // simple
+        PRELOADER: prefix+'PRELOADER',
+        HANDLE_ERROR: prefix+'HANDLE_ERROR',
+        CLEAR: prefix+'CLEAR',
+        // complex
+        LOG_IN: createComplexType(prefix+'LOG_IN')
+    }
+})();
 
 export const APP = (role: string) => {
-    let appPrefix = `@${role}@app/`;
+    let prefix = `@${role}@app/`;
     // common action types for all roles
     let actions = {
-        PRELOADER: appPrefix+'PRELOADER',
-        LOG_OUT: createComplexType(appPrefix+'LOG_OUT')
-    };
-    // NOTE here depends on role you can add some role-specific actions
-    switch(role) {
-        default:
-    }
-    return actions;
-};
-
-export const SUBJECTS = (role: string) => {
-    let cardsPrefix = `@${role}@subjects-page/`;
-
-    // common action types for all roles
-    let actions = {
+        // helpers
+        PREFIX: new RegExp(prefix, 'i'),
         // simple
-        PRELOADER: cardsPrefix+'PRELOADER',
-        HANDLE_ERROR: cardsPrefix+'HANDLE_ERROR',
-        CLEAR: cardsPrefix+'CLEAR',
-        FILTER: cardsPrefix+'FILTER',
+        PRELOADER: prefix+'PRELOADER',
         // complex
-        GET_SUBJECTS: createComplexType(cardsPrefix+'GET_SUBJECTS')
+        LOG_OUT: createComplexType(prefix+'LOG_OUT')
     };
     // NOTE here depends on role you can add some role-specific actions
     switch(role) {
@@ -62,12 +48,62 @@ export const SUBJECTS = (role: string) => {
     return actions;
 };
 
-const STUDENT = {
-    APP: APP(ROLES.STUDENT),
-    SUBJECTS: SUBJECTS(ROLES.STUDENT)
+const SUBJECTS = (role: string) => {
+    let prefix = `@${role}@subjects-page/`;
+
+    // common action types for all roles
+    let actions = {
+        // helpers
+        PREFIX: new RegExp(prefix, 'i'),
+        // simple
+        INITIALIZE: prefix+'INITIALIZE',
+        PRELOADER: prefix+'PRELOADER',
+        HANDLE_ERROR: prefix+'HANDLE_ERROR',
+        CLEAR: prefix+'CLEAR',
+        FILTER: prefix+'FILTER',
+        // complex
+        GET_SUBJECTS: createComplexType(prefix+'GET_SUBJECTS'),
+        GET_SUBJECT: createComplexType(prefix+'GET_SUBJECT')
+    };
+    // NOTE here depends on role you can add some role-specific actions
+    switch(role) {
+        default:
+    }
+    return actions;
 };
 
-export default {
-    SIGN_IN,
-    STUDENT
-}
+const HOME = (role: string) => {
+    let prefix = `@${role}@home-page/`;
+
+    // common action types for all roles
+    let actions = {
+        // helpers
+        PREFIX: new RegExp(prefix, 'i'),
+        // simple
+        INITIALIZE: prefix+'INITIALIZE',
+        PRELOADER: prefix+'PRELOADER',
+        HANDLE_ERROR: prefix+'HANDLE_ERROR',
+        CLEAR: prefix+'CLEAR',
+        // complex
+        GET_LAST_EVENTS: createComplexType(prefix+'GET_LAST_EVENTS'),
+        GET_UPCOMING_EVENTS: createComplexType(prefix+'GET_UPCOMING_EVENTS'),
+    };
+    // NOTE here depends on role you can add some role-specific actions
+    switch(role) {
+        default:
+    }
+    return actions;
+};
+
+export const STUDENT = {
+    APP: APP(ROLES.STUDENT),
+    SUBJECTS: SUBJECTS(ROLES.STUDENT),
+    HOME: HOME(ROLES.STUDENT),
+
+};
+
+let modalPrefix = `@@modal/`;
+export const MODAL = {
+    SHOW: modalPrefix + 'SHOW',
+    HIDE: modalPrefix + 'HIDE',
+};

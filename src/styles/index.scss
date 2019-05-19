@@ -1,5 +1,7 @@
 // Outsource
 @import '~bootstrap/scss/bootstrap.scss';
+@import '~react-redux-toastr/src/styles/index.scss';
+@import "~react-alice-carousel/lib/scss/alice-carousel.scss";
 
 // fonts
 @import "fonts";
@@ -15,6 +17,9 @@
 
 // base
 @import "base";
+
+// animations
+@import "animations";
 
 // components
 @import "components/index";

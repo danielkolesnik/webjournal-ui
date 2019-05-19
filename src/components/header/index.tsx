@@ -17,8 +17,10 @@ const Header = (props: Props) => {
 
     switch (role) {
         case ROLES.PROFESSOR:
+            // @ts-ignore
             return <ProfessorHeader location={location} {...rest}/>;
         case ROLES.STUDENT:
+            // @ts-ignore
             return <StudentHeader location={location} {...rest}/>;
         default:
             return <div>Something bad happened...</div>;

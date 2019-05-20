@@ -1,6 +1,6 @@
 
 // temporary emulation of API service
-import SUBJECTS from '../constants/subjects';
+import SUBJECTS, {SUBJECT_DTOS} from '../constants/subjects';
 import EVENTS from '../constants/events';
 
 export default {
@@ -9,18 +9,25 @@ export default {
             setTimeout(() => {
                 resolve(SUBJECTS);
                 // reject('Can\'t find subjects for you');
-            }, 0.7 * 1000)
+            }, 0.5 * 1000)
         });
     },
-    getSubjectById: () => {
-
+    getSubjectDTOById: (id: number) => {
+        return new Promise((resolve: any, reject: any) => {
+            setTimeout(() => {
+                for(let subject of SUBJECT_DTOS) {
+                    if(subject.id === id) resolve(subject);
+                }
+                // reject('Can\'t find subjects for you');
+            }, 0.5 * 1000)
+        });
     },
     getUpcomingEvents: () => {
         return new Promise((resolve: any, reject: any) => {
             setTimeout(() => {
                 resolve(EVENTS.UPCOMING_EVENTS);
                 // reject('Can\'t find upcoming events for you');
-            }, 0.7 * 1000)
+            }, 0.5 * 1000)
         });
     },
     getLastEvents: () => {
@@ -28,7 +35,7 @@ export default {
             setTimeout(() => {
                 resolve(EVENTS.LAST_EVENTS);
                 // reject('Can\'t find last events for you');
-            }, 0.7 * 1000)
+            }, 0.3 * 1000)
         });
     }
 };

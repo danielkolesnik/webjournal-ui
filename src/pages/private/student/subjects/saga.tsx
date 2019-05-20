@@ -12,6 +12,7 @@ const { SUBJECTS } = STUDENT;
 export default function* ():any {
     yield takeEvery(SUBJECTS.INITIALIZE, initializeSaga);
     yield takeEvery(SUBJECTS.GET_SUBJECTS.REQUEST, getSubjectsSaga);
+    yield takeEvery(SUBJECTS.GET_SUBJECT.REQUEST, getSubjectSaga);
 }
 
 function* initializeSaga():any {
@@ -38,5 +39,15 @@ function* getSubjectsSaga():any {
     } catch(error) {
         yield call(toastr.error, 'Error', error.message||error);
         yield put({type: SUBJECTS.GET_SUBJECTS.ERROR});
+    }
+}
+
+function* getSubjectSaga({payload}: any): any {
+    try {
+        let data = yield call(API.getSubjectDTOById, payload);
+        yield put({type: SUBJECTS.GET_SUBJECT.FINISH, payload: data});
+    } catch(error) {
+        yield call(toastr.error, 'Error', error.message||error);
+        yield put({type: SUBJECTS.GET_SUBJECT.ERROR});
     }
 }

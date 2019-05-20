@@ -1,0 +1,66 @@
+.event-modal {
+
+  .modal-content {
+
+    .modal-title {
+
+    }
+
+    .modal-title {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+
+    .modal-body, .modal-footer {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    .modal-body {
+      font-weight: 500;
+
+      .subject-name {
+        font-size: 1.2em;
+        font-style: italic;
+      }
+
+      .teachers {
+        margin-bottom: 40px;
+      }
+
+      .points {
+        font-size: 1.6em;
+
+        .user-mark {
+          color: #007bff;
+
+          &.bad {
+            color: #dc3545;
+          }
+
+          &.good {
+            color: #28a745;
+          }
+        }
+      }
+
+      .dates {
+        display: grid;
+        grid-template-columns: 50% 50%;
+
+        .event-date, .value, .max-points {
+          font-weight: bold;
+          border-bottom: 1px black dotted;
+          overflow: hidden;
+        }
+        .value {
+          text-align: right;
+        }
+      }
+    }
+
+    .modal-footer {
+
+    }
+  }
+}

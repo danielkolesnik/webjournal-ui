@@ -1,17 +1,19 @@
 // local dependencies
-import Subject from '../../../../types/student/Subject';
+import Subject, {SubjectDTO} from '../../../../types/student/Subject';
 import {STUDENT} from "../../../../constants/actions";
 import Action from "../../../../types/Action";
 const {SUBJECTS} = STUDENT;
 
 type State = {
-    preloader: boolean,
+    preloader: boolean
     subjects: Subject[]
+    subject: SubjectDTO | null
 }
 
 let initialState: State = {
     preloader: false,
-    subjects: []
+    subjects: [],
+    subject: null
 };
 
 // App Reducer
@@ -24,6 +26,9 @@ export default function(state: State = initialState, action: Action): State {
             break;
         case SUBJECTS.GET_SUBJECTS.FINISH:
             state = {...state, subjects: payload};
+            break;
+        case SUBJECTS.GET_SUBJECT.FINISH:
+            state = {...state, subject: payload};
             break;
         case SUBJECTS.CLEAR:
             state = initialState;

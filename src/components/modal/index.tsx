@@ -51,6 +51,7 @@ class ModalContainer extends React.Component<Props, any> {
                     onHide={this.closeModal}
                     size={modalProps.size||''}
                     centered
+                    dialogClassName={modalType.toLowerCase()+'-modal'}
                 >
                     <SpecifiedModal
                         closeModal={this.closeModal}

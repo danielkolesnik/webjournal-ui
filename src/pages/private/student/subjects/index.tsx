@@ -33,7 +33,7 @@ class Subjects extends React.Component<any, any> {
 
     openSubject = (subject: Subject) => {
         this.props.showModal(STUDENT_MODAL.SUBJECT, {
-            subject,
+            subjectId: subject.id,
             open: true,
             size: 'lg'
         })

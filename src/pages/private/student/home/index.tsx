@@ -3,16 +3,20 @@ import React from 'react';
 import {
     Container,
     Row,
-    Col, Card, Button
+    Col,
+    Card,
+    Button
 } from "react-bootstrap";
 import {connect} from "react-redux";
 import AliceCarousel from 'react-alice-carousel';
-import {IoIosArrowDropleft, IoIosArrowDropright} from 'react-icons/io';
+import {IoIosArrowDropleft, IoIosArrowDropright, IoIosEye} from 'react-icons/io';
+import moment from 'moment';
 
 // local dependencies
 import Preloader, {NumberPreloader} from "../../../../components/Preloader";
-import {ExamEvent, MarkEvent, Event} from "../../../../types/student/Event";
+import {UpcomingEvent, MarkEvent} from "../../../../types/student/Event";
 import {STUDENT, MODAL} from "../../../../constants/actions";
+import {STUDENT_MODAL} from "../../../../components/modal/view";
 
 class Home extends React.Component<any, any> {
     state = {
@@ -31,26 +35,35 @@ class Home extends React.Component<any, any> {
         this.props.initialize();
     }
 
-    openEvent = (e:any, event: ExamEvent|MarkEvent) => {
-        console.log(e.type);
+    openEvent = (event: UpcomingEvent|MarkEvent) => {
+        this.props.showModal(STUDENT_MODAL.EVENT, {
+            event,
+            open: true,
+            size: 'lg'
+        })
     };
 
     handleOnDragStart = (e:any) => e.preventDefault();
 
     componentWillReceiveProps(nextProps:any) {
         if(this.props !== nextProps) {
-            let carouselItems = nextProps.upcomingEvents.map((event:MarkEvent|ExamEvent, k: number) => {
+            let carouselItems = nextProps.upcomingEvents.map((event:MarkEvent|UpcomingEvent, k: number) => {
                 return (
-                    <Card className='event' key={k}
-                          onClick={(e:any)=>this.openEvent(e, event)}
+                    <Card className={`event ${nextProps.upcomingEvents.length<=3? 'ml-auto mr-auto': ''}`} key={k}
                           onDragStart={this.handleOnDragStart}
                     >
                         <Card.Body>
                             <Card.Title>{event.name}</Card.Title>
+                            <Card.Text className='subject-name'>{event.subject.name}</Card.Text>
+                            <Button
+                                onClick={()=>this.openEvent(event)}
+                                variant='outline-info'
+                                className='open-event-btn'
+                            >
+                                <IoIosEye/>
+                            </Button>
+                            <Card.Subtitle className='event-date'>{moment(event.date,'DD-MM-YYYY').format('DD MMMM YYYY')}</Card.Subtitle>
                             <Card.Subtitle>{event.type}</Card.Subtitle>
-                            <Card.Text>
-                                Some content
-                            </Card.Text>
                         </Card.Body>
                     </Card>
 
@@ -79,19 +92,22 @@ class Home extends React.Component<any, any> {
                         </h3>
                     </Col>
                 </Row>
+                <Preloader isOpen={preloader.lastEvents}/>
                 <Row className={!preloader.lastEvents && !lastEvents.length? 'd-none': ''}>
                     <Col>
-                        <div className="last-events">
-                            <Preloader isOpen={preloader.lastEvents}/>
+                        <div className="last-events m-auto">
                             {
-                                lastEvents.map((event:MarkEvent|ExamEvent, k: number) => {
+                                lastEvents.map((event:MarkEvent, k: number) => {
+                                    let badRes = event.maxPoints/2 > event.points;
+                                    let goodRes = event.maxPoints*0.75 < event.points;
                                     return (
-                                        <Card className='event' key={k} onClick={(e:any)=>this.openEvent(e, event)}>
+                                        <Card className={`event ${badRes? 'bad': goodRes? 'good': ''}`} key={k} onClick={()=>this.openEvent(event)}>
                                             <Card.Body>
                                                 <Card.Title>{event.name}</Card.Title>
                                                 <Card.Text>
                                                     Some content
                                                 </Card.Text>
+                                                <Card.Subtitle className='event-date'>{moment(event.date,'DD-MM-YYYY').format('DD MMMM YYYY')}</Card.Subtitle>
                                                 <Card.Subtitle>{event.type}</Card.Subtitle>
                                             </Card.Body>
                                         </Card>
@@ -138,6 +154,8 @@ export default connect(
         ...state.homeS
     }),
     dispatch => ({
-        initialize: () => dispatch({type: STUDENT.HOME.INITIALIZE})
+        initialize: () => dispatch({type: STUDENT.HOME.INITIALIZE}),
+        showModal: (modalType: string, modalProps: any) => dispatch({type: MODAL.SHOW, payload: {modalProps, modalType}}),
+
     })
 )(Home);

@@ -12,6 +12,7 @@ import sLogo from '../../assets/s-logo.png';
 import {STUDENT_ROUTES} from "../../constants/routes";
 import {connect} from "react-redux";
 import OutsideClickHandler from "../OutsideClickHandler";
+import {APP} from "../../constants/actions";
 
 class StudentHeader extends React.Component<any, any> {
 
@@ -57,7 +58,12 @@ class StudentHeader extends React.Component<any, any> {
                                         )
                                     })
                                 }
-                                <span className='nav-link logout-btn' data-alt='Logout'>Logout</span>
+                                <span className='nav-link logout-btn'
+                                      data-alt='Logout'
+                                      onClick={this.props.logout}
+                                >
+                                    Logout
+                                </span>
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
@@ -70,5 +76,5 @@ class StudentHeader extends React.Component<any, any> {
 export default connect(
     null,
     dispatch => ({
-        logout: ()=>dispatch({type: 'LOGOUT'})
+        logout: ()=>dispatch({type: APP.LOG_OUT})
 }))(StudentHeader);

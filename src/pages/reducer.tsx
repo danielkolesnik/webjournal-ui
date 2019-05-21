@@ -1,7 +1,7 @@
 // local dependencies
 import ROLES from '../constants/roles';
 import Action from "../types/Action";
-import {APP, SIGN_IN} from "../constants/actions";
+import {APP} from "../constants/actions";
 
 
 type State = {
@@ -31,7 +31,10 @@ export default function(state: State = initialState, action: Action): State {
 
         case 'authorization':
             state = {...state, auth: true, role: payload.role};
-            console.log(payload);
+            break;
+
+        case APP.LOG_OUT:
+            state = {...state, auth: false};
             break;
 
         // case '@@router/LOCATION_CHANGE':

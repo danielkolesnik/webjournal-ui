@@ -104,9 +104,7 @@ class Home extends React.Component<any, any> {
                                         <Card className={`event ${badRes? 'bad': goodRes? 'good': ''}`} key={k} onClick={()=>this.openEvent(event)}>
                                             <Card.Body>
                                                 <Card.Title>{event.name}</Card.Title>
-                                                <Card.Text>
-                                                    Some content
-                                                </Card.Text>
+                                                <Card.Text className='subject-name'>{event.subject.name}</Card.Text>
                                                 <Card.Subtitle className='event-date'>{moment(event.date,'DD-MM-YYYY').format('DD MMMM YYYY')}</Card.Subtitle>
                                                 <Card.Subtitle>{event.type}</Card.Subtitle>
                                             </Card.Body>

@@ -1,6 +1,7 @@
-.event-modal {
+//.event-modal {
 
   .modal-content {
+    overflow: hidden;
 
     .modal-title {
 
@@ -9,6 +10,10 @@
     .modal-title {
       padding-left: 25px;
       padding-right: 25px;
+
+      &:before {
+
+      }
     }
 
     .modal-body, .modal-footer {
@@ -18,6 +23,13 @@
 
     .modal-body {
       font-weight: 500;
+
+      .modal-title {
+        padding-top: 0;
+        padding-left: 0;
+        margin-left: -5px;
+        font-size: 1.2em;
+      }
 
       .subject-name {
         font-size: 1.2em;
@@ -63,4 +75,4 @@
 
     }
   }
-}
+//}

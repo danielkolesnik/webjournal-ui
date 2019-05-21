@@ -30,10 +30,10 @@ export const SIGN_IN = (() => {
     }
 })();
 
-export const APP = (role: string) => {
-    let prefix = `@${role}@app/`;
+export const APP = (() => {
+    let prefix = `@app/`;
     // common action types for all roles
-    let actions = {
+    return {
         // helpers
         PREFIX: new RegExp(prefix, 'i'),
         // simple
@@ -41,12 +41,7 @@ export const APP = (role: string) => {
         // complex
         LOG_OUT: createComplexType(prefix+'LOG_OUT')
     };
-    // NOTE here depends on role you can add some role-specific actions
-    switch(role) {
-        default:
-    }
-    return actions;
-};
+})();
 
 const SUBJECTS = (role: string) => {
     let prefix = `@${role}@subjects-page/`;
@@ -60,6 +55,7 @@ const SUBJECTS = (role: string) => {
         PRELOADER: prefix+'PRELOADER',
         HANDLE_ERROR: prefix+'HANDLE_ERROR',
         CLEAR: prefix+'CLEAR',
+        CLEAR_MODAL: prefix+'CLEAR_MODAL',
         FILTER: prefix+'FILTER',
         // complex
         GET_SUBJECTS: createComplexType(prefix+'GET_SUBJECTS'),
@@ -96,11 +92,15 @@ const HOME = (role: string) => {
 };
 
 export const STUDENT = {
-    APP: APP(ROLES.STUDENT),
     SUBJECTS: SUBJECTS(ROLES.STUDENT),
     HOME: HOME(ROLES.STUDENT),
 
 };
+
+export default {
+    APP: APP,
+
+}
 
 let modalPrefix = `@@modal/`;
 export const MODAL = {

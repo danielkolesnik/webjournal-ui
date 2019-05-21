@@ -10,7 +10,6 @@ type Subject = {
 export interface SubjectDTO extends Subject {
     upcomingEvents: UpcomingEventDTO[]
     lastEvents: MarkEventDTO[]
-    points: number
 }
 
 export default Subject;

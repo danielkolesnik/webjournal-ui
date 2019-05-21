@@ -90,11 +90,9 @@ class Subjects extends React.Component<any, any> {
                                 {
                                     subjects.map((subject: any, k: number) => {
                                         let teachers = "";
-                                        if (typeof subject.teachers === 'object') {
-                                            subject.teachers.map((t: string, i: number) => {
-                                                return teachers += t + (i<subject.teachers.length?', ':'');
-                                            })
-                                        } else teachers = subject.teachers;
+                                        subject.teachers.map((t: string, i: number) => {
+                                            return teachers += t + (i < subject.teachers.length? ', ':'');
+                                        });
                                         return (
                                             <Card className='subject' key={k} onClick={()=>this.openSubject(subject)}>
                                                 <Card.Body>

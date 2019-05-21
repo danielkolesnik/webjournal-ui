@@ -33,6 +33,9 @@ export default function(state: State = initialState, action: Action): State {
         case SUBJECTS.CLEAR:
             state = initialState;
             break;
+        case SUBJECTS.CLEAR_MODAL:
+            state = {...state, subject: null};
+            break;
 
         default:
             state = {...state};

@@ -11,6 +11,8 @@ import {
 import pLogo from '../../assets/p-logo.png';
 import {PROFESSOR_ROUTES} from "../../constants/routes";
 import OutsideClickHandler from '../../components/OutsideClickHandler';
+import {APP} from "../../constants/actions";
+import {connect} from "react-redux";
 
 
 class ProfessorHeader extends React.Component<any, any> {
@@ -57,7 +59,12 @@ class ProfessorHeader extends React.Component<any, any> {
                                     )
                                 })
                             }
-                            <span className='nav-link logout-btn' data-alt='Logout'>Logout</span>
+                            <span className='nav-link logout-btn'
+                                  data-alt='Logout'
+                                  onClick={this.props.logout}
+                            >
+                                Logout
+                            </span>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -67,4 +74,8 @@ class ProfessorHeader extends React.Component<any, any> {
     }
 }
 
-export default ProfessorHeader;
+export default connect(
+    null,
+    dispatch => ({
+        logout: ()=>dispatch({type: APP.LOG_OUT})
+}))(ProfessorHeader);

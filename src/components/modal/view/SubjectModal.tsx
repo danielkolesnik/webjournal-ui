@@ -30,6 +30,7 @@ class SubjectModal extends React.Component<Props, any> {
 
     render() {
         const {subject, closeModal} = this.props;
+        let professors = "";
         let points = 0;
         let isGood, isBad;
         if(subject!==null) {
@@ -38,6 +39,10 @@ class SubjectModal extends React.Component<Props, any> {
             }
             isGood = 100 > points;
             isBad = 75 < points;
+            subject.professors.map((t: any, i: number) => {
+                console.log(t);
+                return professors += t.last_name + (i+1!==subject.professors.length?', ':'');
+            });
         }
 
         return [
@@ -52,7 +57,7 @@ class SubjectModal extends React.Component<Props, any> {
                     :
                         <Row className={subject===null ? 'd-none' : ''}>
                             <Col>
-                                <p className="teachers">{subject.teachers}</p>
+                                <p className="teachers">{professors}</p>
                             </Col>
                             <Col md={4} xs={5} className='d-flex flex-row-reverse'>
                                 <p className="points"><span className={`user-mark ${isBad? 'bad': isGood? 'good': ''}`}>{points}</span> / 100</p>

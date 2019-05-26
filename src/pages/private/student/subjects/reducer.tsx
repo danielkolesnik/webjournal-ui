@@ -1,5 +1,5 @@
 // local dependencies
-import Subject, {SubjectDTO} from '../../../../types/student/Subject';
+import {Subject, SubjectDTO} from '../../../../types/student/Subject';
 import {STUDENT} from "../../../../constants/actions";
 import Action from "../../../../types/Action";
 const {SUBJECTS} = STUDENT;

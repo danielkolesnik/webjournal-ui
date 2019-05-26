@@ -1,10 +1,10 @@
 import {MarkEventDTO, UpcomingEventDTO} from "./Event";
 
-type Subject = {
+export type Subject = {
     id: number
     name: string
     type: string
-    teachers: string[]
+    professors: {id: number, first_name: string, last_name: string}[]
 };
 
 export interface SubjectDTO extends Subject {
@@ -12,4 +12,13 @@ export interface SubjectDTO extends Subject {
     lastEvents: MarkEventDTO[]
 }
 
-export default Subject;
+export const SUBJECT_TYPES = {
+    EXAM: 'EXAM',
+    CREDIT: 'CREDIT'
+};
+
+export const deserialize = ({id, name, type, professors}: any) => {
+
+};
+
+

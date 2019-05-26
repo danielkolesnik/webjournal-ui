@@ -1,35 +1,36 @@
 import {EVENT_TYPES} from "../types/student/Event";
+import {SUBJECT_TYPES} from "../types/student/Subject";
 
 
 export default [
     {
         id: 1,
         name: 'OOP Python',
-        type: 'credit',
+        type: SUBJECT_TYPES.EXAM,
         teachers: ['Zaretskaya I.T.']
     },
     {
         id: 2,
         name: 'Mathematical Analysis',
-        type: 'exam',
+        type: SUBJECT_TYPES.EXAM,
         teachers: ['Gefter S.L.']
     },
     {
         id: 3,
         name: 'C++ STL',
-        type: 'exam',
+        type: SUBJECT_TYPES.EXAM,
         teachers: ['Vladimirova M.V.', 'Morozova A.G.']
     },
     {
         id: 4,
         name: 'Operation Systems',
-        type: 'exam',
+        type: SUBJECT_TYPES.CREDIT,
         teachers: ['Ignatov S.Y.']
     },
     {
         id: 4,
         name: 'Study of mathematical operations',
-        type: 'exam',
+        type: SUBJECT_TYPES.CREDIT,
         teachers: ['Polyakova L.Y.']
     }
 ];

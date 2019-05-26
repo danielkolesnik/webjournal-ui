@@ -5,7 +5,7 @@ import { takeEvery, take, put, call } from 'redux-saga/effects';
 // local dependencies
 import {STUDENT} from "../../../../constants/actions";
 import API from '../../../../services/API';
-
+import {Professor, Subject} from '../../../../models';
 
 const { SUBJECTS } = STUDENT;
 
@@ -34,7 +34,9 @@ function* initializeSaga():any {
 
 function* getSubjectsSaga():any {
     try {
-        let data = yield call(API.getSubjects);
+        let {data} = yield call(API.getSubjects);
+        let result = data.map((entity:any) => (new Subject(entity)));
+        console.log(data, result);
         yield put({type: SUBJECTS.GET_SUBJECTS.SUCCESS, payload: data});
     } catch(error) {
         yield call(toastr.error, 'Error', error.message||error);
@@ -44,7 +46,11 @@ function* getSubjectsSaga():any {
 
 function* getSubjectSaga({payload}: any): any {
     try {
-        let data = yield call(API.getSubjectDTOById, payload);
+        let {data} = yield call(API.getSubjectDTOById, payload);
+        // NOTE Delete after implementing Events
+        console.log(data);
+        data.lastEvents = [];
+        data.upcomingEvents = [];
         yield put({type: SUBJECTS.GET_SUBJECT.FINISH, payload: data});
     } catch(error) {
         yield call(toastr.error, 'Error', error.message||error);

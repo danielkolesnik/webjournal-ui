@@ -7,13 +7,12 @@ import {
     Card,
 } from "react-bootstrap";
 import {connect} from "react-redux";
-import {IoIosInfinite} from 'react-icons/io';
 
 // local dependencies
 // import Aside from "../../../../components/aside/StudentAside";
 import {STUDENT, MODAL} from "../../../../constants/actions";
 import {STUDENT_MODAL} from "../../../../components/modal/view";
-import Subject from "../../../../types/student/Subject";
+import {Subject} from "../../../../types/student/Subject";
 import Preloader, {NumberPreloader} from "../../../../components/Preloader";
 
 /**
@@ -89,9 +88,9 @@ class Subjects extends React.Component<any, any> {
                             <div className='subjects'>
                                 {
                                     subjects.map((subject: any, k: number) => {
-                                        let teachers = "";
-                                        subject.teachers.map((t: string, i: number) => {
-                                            return teachers += t + (i < subject.teachers.length? ', ':'');
+                                        let professors = "";
+                                        subject.professors.map((t: any, i: number) => {
+                                            return professors += t.last_name + (i < subject.professors.length? ', ':'');
                                         });
                                         return (
                                             <Card className='subject' key={k} onClick={()=>this.openSubject(subject)}>
@@ -99,10 +98,10 @@ class Subjects extends React.Component<any, any> {
                                                     <Card.Title>{subject.name}</Card.Title>
                                                     <Card.Subtitle>{subject.type}</Card.Subtitle>
                                                     <Card.Text>
-                                                        Teachers:
+                                                        teachers:
                                                     </Card.Text>
                                                     <Card.Text>
-                                                        {teachers}
+                                                        {professors}
                                                     </Card.Text>
                                                 </Card.Body>
                                             </Card>

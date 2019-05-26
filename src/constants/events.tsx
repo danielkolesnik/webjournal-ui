@@ -8,7 +8,7 @@ export const UPCOMING_EVENTS: MarkEvent[] | UpcomingEvent[] = [
             id: 1,
             type: EVENT_TYPES.EXAM,
             name: 'Discrete Math',
-            teachers: ['Polyakova L.Y.']
+            professors: [{id: 3, first_name: "Lyudmila", last_name: "Polyakova"}]
         },
         type: EVENT_TYPES.MODULE,
         date: '24-03-2019',
@@ -21,7 +21,7 @@ export const UPCOMING_EVENTS: MarkEvent[] | UpcomingEvent[] = [
             id: 2,
             type: EVENT_TYPES.CREDIT,
             name: 'Mathematical Analysis',
-            teachers: ['Gefter S.L.']
+            professors: [{id: 3, first_name: 'Gefter S.L.', last_name: "Polyakova"}]
         },
         type: EVENT_TYPES.MODULE,
         date: '24-05-2019',
@@ -34,7 +34,7 @@ export const UPCOMING_EVENTS: MarkEvent[] | UpcomingEvent[] = [
             id: 1,
             type: EVENT_TYPES.EXAM,
             name: 'C++ STL',
-            teachers: ['Vladimirova M.V.', ' Morozova A.G.']
+            professors: [{id: 3, first_name: '', last_name: "Vladimirova"}, {id: 3, first_name: '', last_name: "Morozova"}]
         },
         type: EVENT_TYPES.MODULE,
         date: '08-01-2019',
@@ -47,7 +47,7 @@ export const UPCOMING_EVENTS: MarkEvent[] | UpcomingEvent[] = [
             id: 1,
             type: EVENT_TYPES.EXAM,
             name: 'Discrete Math',
-            teachers: ['Morozova A.G.']
+            professors: [{id: 3, first_name: '', last_name: "Morozova"}]
         },
         type: EVENT_TYPES.MODULE,
         date: '12-05-2019',
@@ -60,7 +60,7 @@ export const UPCOMING_EVENTS: MarkEvent[] | UpcomingEvent[] = [
             id: 1,
             type: EVENT_TYPES.CREDIT,
             name: 'Discrete Math',
-            teachers: ['Morozova A.G.']
+            professors: [{id: 3, first_name: '', last_name: "Morozova"}]
         },
         type: EVENT_TYPES.MODULE,
         date: '04-06-2019',
@@ -76,7 +76,7 @@ export const LAST_EVENTS: MarkEvent[] = [
             id: 1,
             type: EVENT_TYPES.CREDIT,
             name: 'Discrete Math',
-            teachers: ['Morozova A.G.']
+            professors: [{id: 3, first_name: '', last_name: "Morozova"}]
         },
         type: EVENT_TYPES.CREDIT,
         date: '20-05-2019',
@@ -91,7 +91,7 @@ export const LAST_EVENTS: MarkEvent[] = [
             id: 1,
             type: EVENT_TYPES.CREDIT,
             name: 'Discrete Math',
-            teachers: ['Morozova A.G.']
+            professors: [{id: 3, first_name: '', last_name: "Morozova"}]
         },
         type: EVENT_TYPES.CREDIT,
         date: '20-05-2019',
@@ -106,7 +106,7 @@ export const LAST_EVENTS: MarkEvent[] = [
             id: 1,
             type: EVENT_TYPES.EXAM,
             name: 'Discrete Math',
-            teachers: ['Morozova A.G.']
+            professors: [{id: 3, first_name: '', last_name: "Morozova"}]
         },
         type: EVENT_TYPES.EXAM,
         date: '04-06-2019',
@@ -121,7 +121,7 @@ export const LAST_EVENTS: MarkEvent[] = [
             id: 1,
             type: EVENT_TYPES.EXAM,
             name: 'Discrete Math',
-            teachers: ['Morozova A.G.']
+            professors: [{id: 3, first_name: '', last_name: "Morozova"}]
         },
         type: EVENT_TYPES.EXAM,
         date: '12-06-2019',

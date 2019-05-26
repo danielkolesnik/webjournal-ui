@@ -18,16 +18,16 @@ class EventModal extends React.Component<Props, any> {
 
     render() {
         const {event, closeModal} = this.props;
-        let teachers = "";
-        event.subject.teachers.map((t: string, i: number) => {
-            return teachers += t + (i<event.subject.teachers.length?', ':'');
+        let professors = "";
+        event.subject.professors.map((t: any, i: number) => {
+            return professors += t.last_name + (i<event.subject.professors.length?', ':'');
         });
         let Body = (
             <ModalBody key='body'>
                 <Row>
                     <Col>
                         <p className="subject-name">{event.subject.name}</p>
-                        <p className="teachers">{teachers}</p>
+                        <p className="teachers">{professors}</p>
                     </Col>
                     <Col md={3} xs={5} className='d-flex flex-row-reverse'>
                     </Col>
@@ -52,7 +52,7 @@ class EventModal extends React.Component<Props, any> {
                     <Row>
                         <Col>
                             <p className="subject-name">{event.subject.name}</p>
-                            <p className="teachers">{teachers}</p>
+                            <p className="teachers">{professors}</p>
                         </Col>
                         <Col md={3} xs={5} className='d-flex flex-row-reverse'>
                             <p className="points"><span className={`user-mark ${badRes? 'bad': goodRes? 'good': ''}`}>{points}</span> / {event.maxPoints}</p>

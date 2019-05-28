@@ -3,7 +3,7 @@ import React from 'react';
 import {Button, Col, ListGroup, ModalBody, ModalFooter, ModalTitle, Row} from "react-bootstrap";
 import {SubjectDTO} from "../../../types/student/Subject";
 import {connect} from 'react-redux';
-import {STUDENT} from "../../../constants/actions";
+import {PROFESSOR} from "../../../constants/actions";
 import Preloader from "../../Preloader";
 import {MarkEvent, MarkEventDTO} from "../../../types/student/Event";
 
@@ -11,14 +11,14 @@ import {MarkEvent, MarkEventDTO} from "../../../types/student/Event";
 
 
 type Props = {
-    subject: SubjectDTO
+    subjectId: number
+    subject: any
     closeModal: ()=>any
     unmount: ()=>any
     initialize: (id: number)=>any
-    subjectId: number
 }
 
-class SubjectModal extends React.Component<Props, any> {
+class StudentSubjectModal extends React.Component<any, any> {
 
     componentDidMount() {
         this.props.initialize(this.props.subjectId);
@@ -29,19 +29,18 @@ class SubjectModal extends React.Component<Props, any> {
     }
 
     render() {
-        const {subject, closeModal} = this.props;
+        const {subject, lastEvents, upcomingEvents, closeModal} = this.props;
         let professors = "";
         let points = 0;
         let isGood, isBad;
         if(subject!==null) {
-            for(let e of subject.lastEvents) {
+            for(let e of lastEvents) {
                 points+=e.points;
             }
             isGood = 100 > points;
             isBad = 75 < points;
             subject.professors.map((t: any, i: number) => {
-                console.log(t);
-                return professors += t.last_name + (i+1!==subject.professors.length?', ':'');
+                return professors += t.lastName + (i+1!==subject.professors.length?', ':'');
             });
         }
 
@@ -69,7 +68,7 @@ class SubjectModal extends React.Component<Props, any> {
                 </ModalTitle>
                 <ListGroup className='mb-3'>
                     {
-                        subject!==null&&subject.upcomingEvents.map((ev, i) => {
+                        subject!==null&&upcomingEvents.map((ev:any, i:any) => {
                             return (
                                 <ListGroup.Item variant="primary" key={'l'+i}>
                                     <Row>
@@ -91,8 +90,8 @@ class SubjectModal extends React.Component<Props, any> {
                 </ModalTitle>
                 <ListGroup>
                 {
-                    subject!==null&&subject.lastEvents.map((ev, i) => {
-                        let {points, evaluationDate} = ev as MarkEventDTO;
+                    subject!==null&&lastEvents.map((ev:any, i:any) => {
+                        let {points, evaluationDate} = ev;
                         let badRes = ev.maxPoints/2 > points;
                         let goodRes = ev.maxPoints*0.75 < points;
                         return (
@@ -128,10 +127,10 @@ class SubjectModal extends React.Component<Props, any> {
 
 export default connect(
     (state:any) => ({
-        subject: state.subjectsS.subject
+        ...state.subjectsS.subject
     }),
     dispatch => ({
-        initialize: (subjectId: number) => dispatch({type: STUDENT.SUBJECTS.GET_SUBJECT.REQUEST, payload: subjectId}),
-        unmount: () => dispatch({type: STUDENT.SUBJECTS.CLEAR_MODAL})
+        initialize: (subjectId: number) => dispatch({type: PROFESSOR.SUBJECTS.GET_SUBJECT.REQUEST, payload: subjectId}),
+        unmount: () => dispatch({type: PROFESSOR.SUBJECTS.CLEAR_MODAL})
     })
-)(SubjectModal);
+)(StudentSubjectModal);

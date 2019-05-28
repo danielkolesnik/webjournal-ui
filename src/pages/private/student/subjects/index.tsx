@@ -46,35 +46,9 @@ class Subjects extends React.Component<any, any> {
         const {asideOpen} = this.state;
         const {subjects, preloader} = this.props;
 
-        // const MENU_ITEMS = [
-        //     {
-        //         name: "",
-        //         callback: () => {
-        //
-        //         }
-        //     },
-        //     {
-        //         name: "",
-        //         callback: () => {
-        //
-        //         }
-        //     },
-        //     {
-        //         name: "",
-        //         callback: () => {
-        //
-        //         }
-        //     },
-        // ];
-
         return (
             <div className={`s-subjects-page ${asideOpen?'aside-open':''}`}>
                 <Container fluid>
-                    {/*<Aside*/}
-                        {/*items={[{name: 'Do useful thing', callback: ()=>{}}]}*/}
-                        {/*isOpenValue={asideOpen}*/}
-                        {/*toggler={this.toggleAside}*/}
-                    {/*/>*/}
                     <Row className='heading mb-3'>
                         <Col>
                             <h3 className='page-name'>

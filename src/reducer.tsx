@@ -6,9 +6,10 @@ import { reducer as toastr } from 'react-redux-toastr';
 
 // local dependencies
 import appReducer from './pages/reducer';
+import loginReducer from './pages/public/reducer';
 import modal from './components/modal/reducer';
-import studentReduser from './pages/private/student/reducer';
-import professorReduser from './pages/private/professor/reducer';
+import studentRedusers from './pages/private/student/reducer';
+import professorRedusers from './pages/private/professor/reducer';
 
 export default (history: any) => combineReducers({
     router: connectRouter(history),
@@ -16,6 +17,7 @@ export default (history: any) => combineReducers({
     form,
     modal,
     app: appReducer,
-    ...studentReduser,
-    professor: professorReduser,
+    login: loginReducer,
+    ...studentRedusers,
+    ...professorRedusers,
 })

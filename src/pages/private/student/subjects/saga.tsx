@@ -1,11 +1,12 @@
 // outsource
 import { toastr } from 'react-redux-toastr';
 import { takeEvery, take, put, call } from 'redux-saga/effects';
+import moment from 'moment';
 
 // local dependencies
 import {STUDENT} from "../../../../constants/actions";
 import API from '../../../../services/API';
-import {Professor, Subject} from '../../../../models';
+import {Professor, Subject, Event} from '../../../../models';
 
 const { SUBJECTS } = STUDENT;
 
@@ -46,13 +47,20 @@ function* getSubjectsSaga():any {
 
 function* getSubjectSaga({payload}: any): any {
     try {
-        let {data} = yield call(API.getSubjectDTOById, payload);
+        let {data} = yield call(API.getSubjectById, payload);
         // NOTE Delete after implementing Events
         console.log(data);
-        data.lastEvents = [];
-        data.upcomingEvents = [];
-        yield put({type: SUBJECTS.GET_SUBJECT.FINISH, payload: data});
+        let subject = new Subject(data);
+        // last events (arg 'from' passed and arg 'to' missed)
+        let last = yield call(API.getEventsOfSubjectById, subject.id, '', moment().format("YYYY.MM.DD"));
+        let lastEvents: any = last.data.map((entity: any) => (new Event(entity)));
+        // last events (arg 'from' missed and arg 'to' passed)
+        let upcoming = yield call(API.getEventsOfSubjectById, subject.id, moment().format("YYYY.MM.DD"));
+        let upcomingEvents: any = upcoming.data.map((entity: any) => (new Event(entity)));
+        console.log(lastEvents, upcomingEvents);
+        yield put({type: SUBJECTS.GET_SUBJECT.FINISH, payload: {subject, lastEvents, upcomingEvents}});
     } catch(error) {
+        console.log(error.message||error);
         yield call(toastr.error, 'Error', error.message||error);
         yield put({type: SUBJECTS.GET_SUBJECT.ERROR});
     }

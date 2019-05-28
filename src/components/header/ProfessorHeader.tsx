@@ -77,5 +77,5 @@ class ProfessorHeader extends React.Component<any, any> {
 export default connect(
     null,
     dispatch => ({
-        logout: ()=>dispatch({type: APP.LOG_OUT})
+        logout: ()=>dispatch({type: APP.LOG_OUT.REQUEST})
 }))(ProfessorHeader);

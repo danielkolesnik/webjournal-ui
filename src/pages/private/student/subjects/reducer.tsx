@@ -7,13 +7,17 @@ const {SUBJECTS} = STUDENT;
 type State = {
     preloader: boolean
     subjects: Subject[]
-    subject: SubjectDTO | null
+    subject: any
 }
 
 let initialState: State = {
     preloader: false,
     subjects: [],
-    subject: null
+    subject: {
+        subject: null,
+        upcomingEvents: [],
+        lastEvents: []
+    }
 };
 
 // App Reducer
@@ -28,13 +32,20 @@ export default function(state: State = initialState, action: Action): State {
             state = {...state, subjects: payload};
             break;
         case SUBJECTS.GET_SUBJECT.FINISH:
-            state = {...state, subject: payload};
+            let {subject, upcomingEvents, lastEvents}: any = payload;
+            state = {...state, subject: {subject, upcomingEvents, lastEvents} };
             break;
         case SUBJECTS.CLEAR:
             state = initialState;
             break;
         case SUBJECTS.CLEAR_MODAL:
-            state = {...state, subject: null};
+            state = {...state,
+                subject: {
+                    subject: null,
+                    upcomingEvents: [],
+                    lastEvents: []
+                }
+            };
             break;
 
         default:

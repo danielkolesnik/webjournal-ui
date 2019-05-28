@@ -1,5 +1,5 @@
 
 export default  {
-    PROFESSOR: 'professor',
-    STUDENT: 'student'
+    PROFESSOR: 'Professor',
+    STUDENT: 'Student'
 }

@@ -3,13 +3,13 @@ import { toastr } from 'react-redux-toastr';
 import { takeEvery, take, put, call } from 'redux-saga/effects';
 
 // local dependencies
-import {STUDENT} from "../../../../constants/actions";
+import {PROFESSOR} from "../../../../constants/actions";
 import API from '../../../../services/API';
 import moment from "moment";
 import {Event} from "../../../../models";
 
 
-const { HOME } = STUDENT;
+const { HOME } = PROFESSOR;
 
 export default function* () {
     yield takeEvery(HOME.INITIALIZE, initializeSaga);

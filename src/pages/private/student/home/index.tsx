@@ -14,7 +14,6 @@ import moment from 'moment';
 
 // local dependencies
 import Preloader, {NumberPreloader} from "../../../../components/Preloader";
-import {UpcomingEvent, MarkEvent} from "../../../../types/student/Event";
 import {STUDENT, MODAL} from "../../../../constants/actions";
 import {STUDENT_MODAL} from "../../../../components/modal/view";
 
@@ -35,9 +34,9 @@ class Home extends React.Component<any, any> {
         this.props.initialize();
     }
 
-    openEvent = (event: UpcomingEvent|MarkEvent) => {
+    openEvent = (eventId: number) => {
         this.props.showModal(STUDENT_MODAL.EVENT, {
-            event,
+            eventId,
             open: true,
             size: 'lg'
         })
@@ -47,16 +46,16 @@ class Home extends React.Component<any, any> {
 
     componentWillReceiveProps(nextProps:any) {
         if(this.props !== nextProps) {
-            let carouselItems = nextProps.upcomingEvents.map((event:MarkEvent|UpcomingEvent, k: number) => {
+            let carouselItems = nextProps.upcomingEvents.map((event:any, k: number) => {
                 return (
                     <Card className={`event ${nextProps.upcomingEvents.length<=3? 'ml-auto mr-auto': ''}`} key={k}
                           onDragStart={this.handleOnDragStart}
                     >
                         <Card.Body>
                             <Card.Title>{event.name}</Card.Title>
-                            <Card.Text className='subject-name'>{event.subject.name}</Card.Text>
+                            <Card.Text className='subject-name'>{event.groupSubjectProfessor.subject_professor.subject.name}</Card.Text>
                             <Button
-                                onClick={()=>this.openEvent(event)}
+                                onClick={()=>this.openEvent(event.id)}
                                 variant='outline-info'
                                 className='open-event-btn'
                             >
@@ -97,14 +96,14 @@ class Home extends React.Component<any, any> {
                     <Col>
                         <div className="last-events m-auto">
                             {
-                                lastEvents.map((event:MarkEvent, k: number) => {
+                                lastEvents.map((event:any, k: number) => {
                                     let badRes = event.maxPoints/2 > event.points;
                                     let goodRes = event.maxPoints*0.75 < event.points;
                                     return (
-                                        <Card className={`event ${badRes? 'bad': goodRes? 'good': ''}`} key={k} onClick={()=>this.openEvent(event)}>
+                                        <Card className={`event ${badRes? 'bad': goodRes? 'good': ''}`} key={k} onClick={()=>this.openEvent(event.id)}>
                                             <Card.Body>
                                                 <Card.Title>{event.name}</Card.Title>
-                                                <Card.Text className='subject-name'>{event.subject.name}</Card.Text>
+                                                <Card.Text className='subject-name'>{event.groupSubjectProfessor.subject_professor.subject.name}</Card.Text>
                                                 <Card.Subtitle className='event-date'>{moment(event.date,'DD-MM-YYYY').format('DD MMMM YYYY')}</Card.Subtitle>
                                                 <Card.Subtitle>{event.type}</Card.Subtitle>
                                             </Card.Body>

@@ -1,22 +1,23 @@
-
 // local dependencies
-// import {PROFESSOR} from '../../../../constants/actions';
-import ROLES from '../../../../constants/roles';
+import {Subject, SubjectDTO} from '../../../../types/student/Subject';
+import {PROFESSOR} from "../../../../constants/actions";
 import Action from "../../../../types/Action";
-// const {SUBJECTS} = STUDENT;
+const {SUBJECTS} = PROFESSOR;
 
 type State = {
-    preloader: boolean,
-    auth: boolean,
-    role: string
+    preloader: boolean
+    subjects: Subject[]
+    subject: any
 }
 
 let initialState: State = {
     preloader: false,
-    // auth: false,
-    auth: true,
-    // role: ROLES.PROFESSOR,
-    role: ROLES.STUDENT
+    subjects: [],
+    subject: {
+        subject: null,
+        upcomingEvents: [],
+        lastEvents: []
+    }
 };
 
 // App Reducer
@@ -24,11 +25,29 @@ export default function(state: State = initialState, action: Action): State {
     const { type, payload } = action;
 
     switch(type) {
-
-        // case PROFESSOR.GET_SUBJECTS.FINISH:
-        //     state = {...state, auth: true, role: payload.role};
-        //     console.log(type, payload);
-        //     break;
+        case SUBJECTS.PRELOADER:
+            state = {...state, preloader: !!payload};
+            break;
+        case SUBJECTS.GET_SUBJECTS.FINISH:
+            console.log(payload);
+            state = {...state, subjects: payload};
+            break;
+        case SUBJECTS.GET_SUBJECT.FINISH:
+            let {subject, upcomingEvents, lastEvents}: any = payload;
+            state = {...state, subject: {subject, upcomingEvents, lastEvents} };
+            break;
+        case SUBJECTS.CLEAR:
+            state = initialState;
+            break;
+        case SUBJECTS.CLEAR_MODAL:
+            state = {...state,
+                subject: {
+                    subject: null,
+                    upcomingEvents: [],
+                    lastEvents: []
+                }
+            };
+            break;
 
         default:
             state = {...state};

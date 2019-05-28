@@ -6,16 +6,18 @@ import {
     Form
 } from "react-bootstrap";
 import { IoMdClose } from 'react-icons/io';
-
+import {reduxForm} from "redux-form";
 
 // local dependencies
 import StudentImg from '../../assets/pages/public/student.png';
 import ProfessorImg from '../../assets/pages/public/professor.png';
 import ROLES from '../../constants/roles';
+import {SIGN_IN} from '../../constants/actions';
+import AuthForm from '../../components/AuthForm';
 
 type Props = {
-    authorizationS?: any
-    authorizationP?: any
+    authStudent?: any
+    authProfessor?: any
     location?: any
     auth?: any
 }
@@ -43,7 +45,7 @@ class PublicLayout extends React.Component<Props, State> {
 
     render() {
         const {isHovered, hoveredPerson } = this.state;
-        const { authorizationS, authorizationP } = this.props;
+        const { authProfessor, authStudent } = this.props;
 
         return (
             <section id='loginPage'>
@@ -79,22 +81,14 @@ class PublicLayout extends React.Component<Props, State> {
                     </div>
                     <div className='forms-wrapper'>
                         <div className='student-form'>
-                            <Form>
-                                <Form.Label>Student number</Form.Label>
-                                <Form.Control type='email' placeholder='Enter student number'/>
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type='password' placeholder='Enter password'/>
-                                <Button onClick={authorizationS} className='submit-btn' variant="outline-info" block>Login</Button>
-                            </Form>
+                            {/*
+                            //@ts-ignore*/}
+                            <AuthForm authorize={authStudent} labelPrefix='student'/>
                         </div>
                         <div className='professor-form'>
-                            <Form>
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type='email' placeholder='Enter email'/>
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type='password' placeholder='Enter password'/>
-                                <Button onClick={authorizationP} className='submit-btn' variant="outline-info" block>Login</Button>
-                            </Form>
+                            {/*
+                            //@ts-ignore*/}
+                            <AuthForm authorize={authProfessor} labelPrefix='professor'/>
                         </div>
                     </div>
                 </div>
@@ -108,7 +102,7 @@ export default connect(
         auth: state.app.auth
     }),
     dispatch => ({
-        authorizationP: () => dispatch({type: 'authorization', payload: { role: ROLES.PROFESSOR }}),
-        authorizationS: () => dispatch({type: 'authorization', payload: { role: ROLES.STUDENT }})
+        authProfessor: (values: any) => dispatch({type: SIGN_IN.LOG_IN.REQUEST, payload: { values, role: ROLES.PROFESSOR }}),
+        authStudent: (values: any) => dispatch({type: SIGN_IN.LOG_IN.REQUEST, payload: { values, role: ROLES.STUDENT }})
     })
 )(PublicLayout);

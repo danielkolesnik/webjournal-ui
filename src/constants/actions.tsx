@@ -72,7 +72,7 @@ const HOME = (role: string) => {
     let prefix = `@${role}@home-page/`;
 
     // common action types for all roles
-    let actions = {
+    let actions:any = {
         // helpers
         PREFIX: new RegExp(prefix, 'i'),
         // simple
@@ -80,13 +80,16 @@ const HOME = (role: string) => {
         PRELOADER: prefix+'PRELOADER',
         HANDLE_ERROR: prefix+'HANDLE_ERROR',
         CLEAR: prefix+'CLEAR',
+        CLEAR_MODAL: prefix+'CLEAR_MODAL',
         // complex
         GET_LAST_EVENTS: createComplexType(prefix+'GET_LAST_EVENTS'),
         GET_UPCOMING_EVENTS: createComplexType(prefix+'GET_UPCOMING_EVENTS'),
+        GET_EVENT: createComplexType(prefix+'GET_SUBJECT')
     };
     // NOTE here depends on role you can add some role-specific actions
     switch(role) {
         default:
+            actions['SOME_ACTION'] = prefix+'SOME_ACTION'
     }
     return actions;
 };
@@ -95,6 +98,11 @@ export const STUDENT = {
     SUBJECTS: SUBJECTS(ROLES.STUDENT),
     HOME: HOME(ROLES.STUDENT),
 
+};
+
+export const PROFESSOR = {
+    SUBJECTS: SUBJECTS(ROLES.PROFESSOR),
+    HOME: HOME(ROLES.PROFESSOR),
 };
 
 export default {

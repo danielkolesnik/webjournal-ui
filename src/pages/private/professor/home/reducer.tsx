@@ -1,8 +1,8 @@
 // local dependencies
 import {Subject} from '../../../../types/student/Subject';
-import {STUDENT} from "../../../../constants/actions";
+import {PROFESSOR} from "../../../../constants/actions";
 import Action from "../../../../types/Action";
-const {HOME} = STUDENT;
+const {HOME} = PROFESSOR;
 
 type State = {
     preloader: object
@@ -34,6 +34,7 @@ export default function(state: State = initialState, action: Action): State {
 
     switch(type) {
         case HOME.PRELOADER:
+            console.log('preloader', payload);
             state = {...state, preloader: {...state.preloader, ...payload}};
             break;
 
